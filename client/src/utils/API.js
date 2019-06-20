@@ -17,7 +17,7 @@ export default {
     saveBook: function(bookData) {
         return axios.post("/api/books", bookData);
     },
-    searchBook: function () {
-        return axios.get("/api/books/search");
+    searchBook: function (title, author) {
+        return axios.get(`/api/books/search?title=${title}&author=${author}`);
     }
 };

@@ -10,11 +10,19 @@ router.route("/")
 
 router.route("/search")
     .get(function (req, res) {
+        var title = req.query.title;
+        var author = req.query.author;
         console.log("searching....");
-        axios.get(`https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=${apiKey}`)
+        axios.get(`https://www.googleapis.com/books/v1/volumes?q=${title}+inauthor:${author}&key=${apiKey}`)
         .then(data => {
             // console.log(data);
-            res.status(200).json(data.data.items);
+            res.status(200).json(data.data.items.map(item => {
+                // pull the important parts together into one simpler object
+                return {
+                    // ...{ key: item.accessInfo.key },
+                    ...item.volumeInfo
+                };
+            }));
         }).catch(err => {
             console.log("error: " + err);
             res.end();

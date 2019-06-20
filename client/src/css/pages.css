@@ -1,0 +1,27 @@
+body {
+    text-align: center;
+}
+
+h4 {
+    font-size: 15pt;
+}
+
+hr {
+    border: none;
+    height: 10px;
+    color: black;
+    background-color: black;
+}
+
+#searchForm {
+    border: 1px solid black;
+    min-width: 600px;
+    display: inline-block;
+    margin: 40px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#searchForm.input {
+    width: 400px;
+}

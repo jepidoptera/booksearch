@@ -1,0 +1,56 @@
+.cardImgContainer {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    bottom: 40px;
+}
+
+.cardImg {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.bookCard {
+    border: 1px solid gray;
+    border-radius: 7px;
+    height: 440px;
+    margin: 20px;
+    padding: 10px;
+    position: relative;
+    transition-duration: 500ms;
+    overflow: hidden;
+}
+
+.bookTitleAndImage {
+    display: block;
+    overflow: hidden;
+    transition-duration: 500ms;
+}
+
+.titleSection {
+    display: block;
+}
+
+.titleSection hr {
+    height: 3px;
+}
+
+.bookDescription {
+    display: block;
+    cursor: default;
+    height: 0px;
+    overflow: hidden;
+    transition-duration: 500ms;
+    position: absolute;
+    width: Calc(100%-100px);
+}
+
+.saveButton {
+    position: absolute;
+    bottom: 10px;
+    display: block;
+    left: 50%;
+    transform: translate(-50%);
+}
