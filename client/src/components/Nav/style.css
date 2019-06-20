@@ -1,0 +1,16 @@
+.customNav { 
+    background-color: red;
+    color: white;
+    font-size: 16pt;
+    height: 40px;
+    position: relative;
+    width: 100%;
+}
+
+.navButton {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    font-size: 14pt;
+    transform: translate(0, -50%);
+}

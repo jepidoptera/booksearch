@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import "../css/pages.css"
 import BookCard from "../components/BookCard"
+import Nav from "../components/Nav";
 
 class Search extends Component {
     state = {
@@ -46,6 +47,7 @@ class Search extends Component {
             <div className="row">
             {/* search params */}
             <div className="col-12">
+                <Nav selected="search"/>
                 <form id="searchForm" 
                     onSubmit={(event) => this.formSubmit(this, event)}>
                     
