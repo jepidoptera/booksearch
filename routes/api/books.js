@@ -20,6 +20,7 @@ router.route("/search")
                 // pull the important parts together into one simpler object
                 return {
                     // ...{ key: item.accessInfo.key },
+                    ...{ thumbnail: item.volumeInfo.imageLinks.thumbnail},
                     ...item.volumeInfo
                 };
             }));

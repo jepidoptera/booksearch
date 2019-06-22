@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import "./style.css";
-import API from "../../utils/API";
 
 class BookCard extends Component {
     componentDidMount() {
@@ -33,15 +32,10 @@ class BookCard extends Component {
         descriptor.style = {};
     }
 
-    saveBook(book) {
-        console.log(`clicked save (${book.title})`);
-        API.saveBook(book);
-    }
-
     render() {
         let book = this.props;
 
-        return book ? (<div className="bookCard">
+        return (<div className="bookCard" id={book._id}>
             {/* main section, initially visible */}
             <div className="bookTitleAndImage">
                 <div className="titleSection">
@@ -62,7 +56,7 @@ class BookCard extends Component {
                 <div className="cardImgContainer">
                     <img className="cardImg"
                         onClick={() => this.openBook(book.previewLink)}
-                        src={book.imageLinks ? book.imageLinks.thumbnail : ""}
+                        src={book.thumbnail || ""}
                         alt={book.title}>
                     </img>
                 </div>
@@ -71,8 +65,8 @@ class BookCard extends Component {
             <div className="bookDescription" onClick={this.closeDescription}>
                 {book.description ? book.description : "no synopsis available"}
             </div>
-            <button className="saveButton" onClick={() => this.saveBook(book)}>save</button>
-        </div>) : ""
+            <button className="saveButton" onClick={() => book.button.function(book)}>{book.button.text}</button>
+        </div>) 
     }
 }
 export default BookCard;

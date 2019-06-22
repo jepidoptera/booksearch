@@ -6,6 +6,7 @@ import API from "../utils/API";
 import "../css/pages.css"
 import BookCard from "../components/BookCard"
 import Nav from "../components/Nav";
+import MessageBar from "../components/MessageBar";
 
 class Saved extends Component {
 
@@ -24,11 +25,25 @@ class Saved extends Component {
         })
     }
 
+    deleteBook(self, book) {
+        API.deleteBook(book._id).then(data => {
+            document.getElementById(data.data._id).parentNode.remove();
+            self.setState({ message: `"${book.title}" removed from archive.` });
+            setTimeout(() => {
+                self.setState({ message: "" });
+            }, 1000);
+            console.log("deleted:", data);
+        }).catch(err => {
+            console.log("error:", err);
+        })
+    }
+
     render() {
         return (
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-12">
+                        <MessageBar message={this.state.message} />
                         <Nav selected="saved" />
                         <h3>Saved Books</h3>
                         <hr></hr>
@@ -43,7 +58,7 @@ class Saved extends Component {
                     {this.state.books.map((book, i) => {
                         return (
                             <div className="col-xs-12 col-md-6 col-lg-4" key={i}>
-                                <BookCard {...book} key={i}></BookCard>
+                                <BookCard {...book} button={{ text: "delete", function: (book) => { console.log("id: " + book.id); this.deleteBook(this, book) } }} key={i}></BookCard>
                             </div>
                         )
                     })}

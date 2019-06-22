@@ -6,10 +6,12 @@ import API from "../utils/API";
 import "../css/pages.css"
 import BookCard from "../components/BookCard"
 import Nav from "../components/Nav";
+import MessageBar from "../components/MessageBar";
 
 class Search extends Component {
     state = {
-        books: []
+        books: [],
+        message: ""
     };
 
     componentDidMount() {
@@ -41,12 +43,26 @@ class Search extends Component {
         self.findBook(event.target.title.value, event.target.author.value);
     }
 
+    saveBook(self, book) {
+        console.log(`clicked save (${book.title})`);
+        // message("book saved.");
+        API.saveBook(book).then(data => {
+            console.log("deleting", data);
+            document.getElementById(data.data.title).remove();
+        });
+        self.setState({ message: `"${book.title}" saved to archive.` });
+        setTimeout(() => {
+            self.setState({ message: "" });
+        }, 1000);
+    }
+
     render() {
         return (
             <div className="container-flex">
             <div className="row">
             {/* search params */}
             <div className="col-12">
+                <MessageBar message={this.state.message} />
                 <Nav selected="search"/>
                 <form id="searchForm" 
                     onSubmit={(event) => this.formSubmit(this, event)}>
@@ -66,8 +82,8 @@ class Search extends Component {
             <div className="row">
                 {/* books results */}
                 {this.state.books.map((book, i) => { return (
-                    <div className="col-xs-12 col-md-6 col-lg-4" key={i}>
-                        <BookCard {...book} key={i}></BookCard>
+                    <div className="col-xs-12 col-md-6 col-lg-4" key={i} id={book.title}>
+                        <BookCard {...book} button={{ text: "save", function: (book) => { this.saveBook(this, book) } }} key={i}></BookCard>
                     </div>
                 )
                 })}
@@ -77,5 +93,5 @@ class Search extends Component {
         )
     }
 }
-    
+
 export default Search;

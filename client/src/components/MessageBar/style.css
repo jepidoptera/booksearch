@@ -1,0 +1,11 @@
+#messageBar {
+    width: 100%;
+    background-color: green;
+    transition: 500ms;
+    position: fixed;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 18pt;
+    z-index: 100;
+}
